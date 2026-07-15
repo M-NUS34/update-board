@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Board Test</title>
+
+<style>
+body{
+    margin:0;
+    background:#1f4e79;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+h1{
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+#clock{
+    font-size:90px;
+    font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Update Board Test</h1>
+
+<div id="clock"></div>
+
+<script>
+function updateClock(){
+
+    const now = new Date();
+
+    const options = {
+        hour:'numeric',
+        minute:'2-digit',
+        second:'2-digit'
+    };
+
+    document.getElementById("clock").innerHTML =
+        now.toLocaleTimeString('en-US', options);
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+</script>
+
+</body>
+</html>
