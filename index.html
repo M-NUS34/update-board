@@ -28,23 +28,27 @@ html, body {
     height: 120px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background: white;
     color: black;
     padding: 0 40px;
     box-sizing: border-box;
     border-top: 2px solid #cccccc;
+    position: relative;
 }
 
 #clock {
-    font-size: 45px;
+    font-size: 40px;
     font-weight: bold;
+    position: absolute;
+    left: 40px;
 }
-
 #weather {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
+    position: absolute;
+    right: 40px;
     color: black;
 }
 
@@ -212,7 +216,7 @@ async function getWeather(){
 }
 
 getWeather();
-
+setInterval(getWeather, 1800000);
 
 </script>
 
