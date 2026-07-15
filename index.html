@@ -92,11 +92,36 @@ updateClock();
 setInterval(updateClock,1000);
 
 
-// TEMPORARY WEATHER DISPLAY
-// We will replace this with a live forecast after the layout works
+async function getWeather(){
 
-document.getElementById("weather").innerHTML =
-"🌤 Weather<br>Massapequa Park, NY";
+    const latitude = 40.6809;
+    const longitude = -73.4707;
+
+    const url = 
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=America%2FNew_York`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    let forecast = "";
+
+    for(let i = 0; i < 5; i++){
+
+        let day = new Date(data.daily.time[i])
+        .toLocaleDateString('en-US', {weekday:'short'});
+
+        let high = Math.round(data.daily.temperature_2m_max[i]);
+        let low = Math.round(data.daily.temperature_2m_min[i]);
+
+        forecast += `${day}: ${high}°/${low}° &nbsp;&nbsp; `;
+    }
+
+    document.getElementById("weather").innerHTML =
+    "🌤 Massapequa Park<br>" + forecast;
+
+}
+
+getWeather();
 
 
 </script>
