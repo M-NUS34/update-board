@@ -3,59 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Update Board Test 2</title>
+
+<title>Update Board</title>
 
 <style>
-body{
-    margin:0;
-    background:#1f4e79;
-    color:white;
-    font-family:Arial, Helvetica, sans-serif;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background: white;
 }
 
-h1{
-    font-size:60px;
-    margin-bottom:20px;
+#board {
+    width: 100%;
+    height: calc(100% - 90px);
+    border: none;
 }
 
-#clock{
-    font-size:90px;
-    font-weight:bold;
+#bottom-bar {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1f4e79;
+    color: white;
+    padding: 0 40px;
+    box-sizing: border-box;
 }
+
+#clock {
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#weather {
+    font-size: 25px;
+    text-align: right;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<h1>Update Board Test</h1>
+<!-- YOUR GOOGLE SHEET GOES HERE -->
+<iframe 
+id="board"
+src="https://docs.google.com/spreadsheets/d/1i1AqmeV3pNuo8yHGQRt3sb5dkC2XmPPJMsP_Q3uoYEU/edit?usp=sharing">
+</iframe>
 
-<div id="clock"></div>
+
+<div id="bottom-bar">
+
+    <div id="clock">
+        Loading...
+    </div>
+
+    <div id="weather">
+        Weather loading...
+    </div>
+
+</div>
+
 
 <script>
+
 function updateClock(){
 
-    const now = new Date();
+    let now = new Date();
 
-    const options = {
-        hour:'numeric',
-        minute:'2-digit',
-        second:'2-digit'
-    };
+    let time = now.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit'
+    });
 
-    document.getElementById("clock").innerHTML =
-        now.toLocaleTimeString('en-US', options);
+    document.getElementById("clock").innerHTML = time;
 
 }
 
 updateClock();
-
 setInterval(updateClock,1000);
+
+
+// TEMPORARY WEATHER DISPLAY
+// We will replace this with a live forecast after the layout works
+
+document.getElementById("weather").innerHTML =
+"🌤 Weather<br>Massapequa Park, NY";
+
+
 </script>
 
 </body>
